@@ -39,10 +39,6 @@ export function buildTimelineData(): TimelineEntry[] {
         continue
       }
 
-      if (usedHours + task.hours > releaseDate.capacityHours) {
-        continue
-      }
-
       selectedTasks.push(task)
       usedHours += task.hours
       assignedTaskIds.add(task.id)

@@ -153,6 +153,11 @@
   color: var(--soft-ink);
 }
 
+.intro-full-width {
+  max-width: none;
+  width: 100%;
+}
+
 .timeline-list {
   list-style: none;
   margin: 0;
@@ -198,10 +203,18 @@
 
 .timeline-date {
   margin: 0 0 0.24rem;
-  color: var(--brand-red);
+  color: var(--soft-ink);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.04em;
+}
+
+.timeline-date-ok {
+  color: #2f8c3a;
+}
+
+.timeline-date-over {
+  color: #c71628;
 }
 
 .mini-task-list {

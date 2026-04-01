@@ -78,8 +78,8 @@ function TimelinePage() {
       <div className="page-head">
         <p className="eyebrow">Project Journey</p>
         <h1 id="timeline-heading">Timeline</h1>
-        <p className="intro">
-          Timeline data is loaded from release dates, tasks, and planned releases sources.
+        <p className="intro intro-full-width">
+          This timeline presents upcoming release dates, planned deliverables, and task progress in one clear view to support transparent client communication.
         </p>
       </div>
 
@@ -88,12 +88,16 @@ function TimelinePage() {
           <li key={event.date} className="timeline-item">
             <div className="timeline-dot" aria-hidden="true" />
             <article className="timeline-card">
-              <p className="timeline-date">{event.date}</p>
-              <h2>Release Window</h2>
-              <p>
-                Capacity: <strong>{event.capacityHours} hours</strong> | Planned work:{' '}
-                <strong>{event.totalTaskHours} hours</strong>
+              <p
+                className={
+                  event.totalTaskHours > event.capacityHours
+                    ? 'timeline-date timeline-date-over'
+                    : 'timeline-date timeline-date-ok'
+                }
+              >
+                {event.date}
               </p>
+              <h2>Release Window</h2>
               <ul className="mini-task-list">
                 {event.tasks.map((task) => (
                   <li key={task.id}>
@@ -253,24 +257,6 @@ function App() {
             Timeline
           </NavLink>
           <NavLink
-            to="/release-dates"
-            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-          >
-            Release Dates
-          </NavLink>
-          <NavLink
-            to="/tasks"
-            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-          >
-            Tasks
-          </NavLink>
-          <NavLink
-            to="/planned-releases"
-            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-          >
-            Planned Releases
-          </NavLink>
-          <NavLink
             to="/release-notes"
             className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           >
@@ -292,7 +278,7 @@ function App() {
       </main>
 
       <footer className="site-footer">
-        <p>Time line project updates by Overleap for OKI-DOKI.</p>
+        <p>Updates by Overleap for OKI-DOKI</p>
       </footer>
     </div>
   )
