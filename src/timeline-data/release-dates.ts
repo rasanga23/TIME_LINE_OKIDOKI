@@ -6,11 +6,19 @@ export const releaseDatesData: ReleaseDateEntry[] = [
     capacityHours: 40,
   },
   {
+    date: '2026-04-10',
+    capacityHours: 52,
+  },
+  {
     date: '2026-04-12',
     capacityHours: 52,
   },
   {
     date: '2026-04-19',
     capacityHours: 44,
+  },
+  {
+    date: '2026-04-29',
+    capacityHours: 60,
   },
 ]

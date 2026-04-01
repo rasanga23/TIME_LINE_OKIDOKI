@@ -7,21 +7,72 @@ export { plannedReleasesData, releaseDatesData, tasksData }
 export type { PlannedReleaseEntry, ReleaseDateEntry, TaskEntry, TaskTag, TimelineEntry } from './types'
 
 export function buildTimelineData(): TimelineEntry[] {
-  const releaseCapacityMap = new Map(releaseDatesData.map((item) => [item.date, item.capacityHours]))
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const plannedMap = new Map(plannedReleasesData.map((item) => [item.date, item.taskIds]))
+  const globallyPlannedTaskIds = new Set(plannedReleasesData.flatMap((item) => item.taskIds))
   const taskMap = new Map(tasksData.map((task) => [task.id, task]))
+  const assignedTaskIds = new Set<string>()
 
-  return plannedReleasesData.map((plan) => {
-    const tasks = plan.taskIds
-      .map((taskId) => taskMap.get(taskId))
-      .filter((task): task is NonNullable<typeof task> => Boolean(task))
+  const futureReleaseDates = [...releaseDatesData]
+    .filter((item) => {
+      const parsedDate = new Date(`${item.date}T00:00:00`)
+      return !Number.isNaN(parsedDate.getTime()) && parsedDate > today
+    })
+    .sort((a, b) => a.date.localeCompare(b.date))
 
-    const totalTaskHours = tasks.reduce((sum, task) => sum + task.hours, 0)
+  return futureReleaseDates.map((releaseDate) => {
+    const selectedTasks = []
+    let usedHours = 0
+    const hasPlannedTasksForDate = plannedMap.has(releaseDate.date)
+    const plannedTaskIds = plannedMap.get(releaseDate.date) ?? []
+
+    for (const taskId of plannedTaskIds) {
+      if (assignedTaskIds.has(taskId)) {
+        continue
+      }
+
+      const task = taskMap.get(taskId)
+
+      if (!task) {
+        continue
+      }
+
+      if (usedHours + task.hours > releaseDate.capacityHours) {
+        continue
+      }
+
+      selectedTasks.push(task)
+      usedHours += task.hours
+      assignedTaskIds.add(task.id)
+    }
+
+    if (!hasPlannedTasksForDate) {
+      for (const task of tasksData) {
+        if (globallyPlannedTaskIds.has(task.id)) {
+          continue
+        }
+
+        if (assignedTaskIds.has(task.id)) {
+          continue
+        }
+
+        if (usedHours + task.hours > releaseDate.capacityHours) {
+          continue
+        }
+
+        selectedTasks.push(task)
+        usedHours += task.hours
+        assignedTaskIds.add(task.id)
+      }
+    }
 
     return {
-      date: plan.date,
-      capacityHours: releaseCapacityMap.get(plan.date) ?? 0,
-      totalTaskHours,
-      tasks,
+      date: releaseDate.date,
+      capacityHours: releaseDate.capacityHours,
+      totalTaskHours: usedHours,
+      tasks: selectedTasks,
     }
   })
 }
