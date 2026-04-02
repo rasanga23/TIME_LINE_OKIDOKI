@@ -24,5 +24,11 @@ export const bugBacklogData: BacklogEntry[] = [
     title: 'When Filtering Requesting ID The Results Are Not Filtered Correctly (CR 23 - System Log)',
     hours: 5,
     tag: 'bug',
-  }
+  },
+  {
+    id: 'ODL-I1074',
+    title: 'Incorrect Wialon KM Calculation',
+    hours: 5,
+    tag: 'bug',
+  },
 ]
