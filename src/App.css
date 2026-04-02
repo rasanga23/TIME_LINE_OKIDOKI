@@ -239,6 +239,15 @@
   gap: 0.35rem;
 }
 
+.task-id {
+  font-weight: 200;
+  color: var(--ink);
+}
+
+.task-title {
+  font-weight: 700;
+}
+
 .task-dot {
   width: 0.56rem;
   height: 0.56rem;

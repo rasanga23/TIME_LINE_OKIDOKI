@@ -12,6 +12,13 @@ const okidokiLogo = `${import.meta.env.BASE_URL}okidoki.png`
 const overleapLogo = `${import.meta.env.BASE_URL}overleaplogo.png`
 
 const timelineData = buildTimelineData()
+const scheduledTaskIds = new Set(
+  timelineData.flatMap((event) => event.tasks.map((task) => task.id)),
+)
+const visibleBacklogSections = backlogSections.map((section) => ({
+  ...section,
+  items: section.items.filter((item) => !scheduledTaskIds.has(item.id)),
+}))
 
 function taskDotClass(tag: TaskEntry['tag']) {
   return `task-dot task-dot-${tag.replace(' ', '-')}`
@@ -74,7 +81,9 @@ function TimelinePage() {
                   <li key={task.id}>
                     <span className="task-label">
                       <span className={taskDotClass(task.tag)} aria-hidden="true" />
-                      {task.title}
+                      <span className="task-id">{task.id}</span>
+                      <span className="task-separator"> - </span>
+                      <span className="task-title">{task.title}</span>
                     </span>
                   </li>
                 ))}
@@ -131,7 +140,7 @@ function TasksPage() {
                 <td>
                   <span className="task-label">
                     <span className={taskDotClass(task.tag)} aria-hidden="true" />
-                    {task.title}
+                        <span className="task-title">{task.title}</span>
                   </span>
                 </td>
                 <td>{task.hours}</td>
@@ -165,7 +174,9 @@ function PlannedReleasesPage() {
                 <li key={task.id}>
                   <span className="task-label">
                     <span className={taskDotClass(task.tag)} aria-hidden="true" />
-                    {task.title}
+                    <span className="task-id">{task.id}</span>
+                    <span className="task-separator"> - </span>
+                    <span className="task-title">{task.title}</span>
                   </span>
                   <span>{task.hours}h</span>
                 </li>
@@ -188,7 +199,7 @@ function BacklogPage() {
       </div>
 
       <div className="backlog-accordion-group">
-        {backlogSections.map((section) => (
+        {visibleBacklogSections.map((section) => (
           <details key={section.key} className="backlog-accordion" open={section.key === 'bug'}>
             <summary className="backlog-summary">
               <span className="task-label">
