@@ -28,7 +28,7 @@ export const bugBacklogData: BacklogEntry[] = [
   {
     id: 'ODL-I1074',
     title: 'Incorrect Wialon KM Calculation',
-    hours: 5,
+    hours: 20,
     tag: 'bug',
   },
 ]

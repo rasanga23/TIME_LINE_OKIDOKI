@@ -4,7 +4,7 @@ export const improvementBacklogData: BacklogEntry[] = [
   {
     id: 'ODL-I2562',
     title: 'Job tracking sharing from link',
-    hours: 10,
+    hours: 30,
     tag: 'improvement',
   },
   {
@@ -16,7 +16,7 @@ export const improvementBacklogData: BacklogEntry[] = [
   {
     id: 'ODL-I1374',
     title: 'Add The Via Location Geofence In/Out Times To Time Update Report',
-    hours: 10,
+    hours: 8,
     tag: 'improvement',
   },
   {

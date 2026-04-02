@@ -4,7 +4,7 @@ export const newChangesBacklogData: BacklogEntry[] = [
   {
     id: 'ODL-I2513',
     title: 'CR - 70 - Display Additional Remark Fields in Job Charge Filtering Panel',
-    hours: 8,
+    hours: 12,
     tag: 'new feature',
   },
   {
