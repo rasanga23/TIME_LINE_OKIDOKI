@@ -14,6 +14,12 @@ export const newChangesBacklogData: BacklogEntry[] = [
     tag: 'new feature',
   },
   {
+    id: 'ODL-I1050',
+    title: 'CR 34 - Assignment Of Multiple Customers & Shipper/Plant To Customer Users.',
+    hours: 8,
+    tag: 'new feature',
+  },
+  {
     id: 'T-104',
     title: 'CR - 45 - Incident Tracker Module',
     hours: 20,
