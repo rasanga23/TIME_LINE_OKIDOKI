@@ -2,6 +2,7 @@ export interface BacklogEntry {
   id: string
   title: string
   hours: number
+  tag: 'bug' | 'improvement' | 'ad hoc' | 'new feature'
 }
 
 export interface BacklogSection {

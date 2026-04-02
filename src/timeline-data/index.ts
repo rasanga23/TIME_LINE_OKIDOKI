@@ -1,9 +1,10 @@
 import { plannedReleasesData } from './planned-releases'
 import { releaseDatesData } from './release-dates'
-import { tasksData } from './tasks'
+import { backlogTasksData } from '../backlog-data'
 import type { TimelineEntry } from './types'
 
-export { plannedReleasesData, releaseDatesData, tasksData }
+export { plannedReleasesData, releaseDatesData }
+export { backlogTasksData as tasksData } from '../backlog-data'
 export type { PlannedReleaseEntry, ReleaseDateEntry, TaskEntry, TaskTag, TimelineEntry } from './types'
 
 export function buildTimelineData(): TimelineEntry[] {
@@ -12,7 +13,7 @@ export function buildTimelineData(): TimelineEntry[] {
 
   const plannedMap = new Map(plannedReleasesData.map((item) => [item.date, item.taskIds]))
   const globallyPlannedTaskIds = new Set(plannedReleasesData.flatMap((item) => item.taskIds))
-  const taskMap = new Map(tasksData.map((task) => [task.id, task]))
+  const taskMap = new Map(backlogTasksData.map((task) => [task.id, task]))
   const assignedTaskIds = new Set<string>()
 
   const futureReleaseDates = [...releaseDatesData]
@@ -45,7 +46,7 @@ export function buildTimelineData(): TimelineEntry[] {
     }
 
     if (!hasPlannedTasksForDate) {
-      for (const task of tasksData) {
+      for (const task of backlogTasksData) {
         if (globallyPlannedTaskIds.has(task.id)) {
           continue
         }

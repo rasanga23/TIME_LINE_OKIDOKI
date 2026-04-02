@@ -265,18 +265,22 @@
 
 .backlog-title-bug {
   color: #c71628;
+  font-weight: 700;
 }
 
 .backlog-title-improvement {
   color: #5f9f2d;
+  font-weight: 700;
 }
 
 .backlog-title-new-changes {
   color: #1b6fc9;
+  font-weight: 700;
 }
 
 .backlog-title-ad-hoc {
   color: #d33f9f;
+  font-weight: 700;
 }
 
 .backlog-accordion-group {

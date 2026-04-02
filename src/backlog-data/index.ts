@@ -2,19 +2,19 @@ import { adHocBacklogData } from './ad-hoc'
 import { bugBacklogData } from './bug'
 import { improvementBacklogData } from './improvement'
 import { newChangesBacklogData } from './new-changes'
-import type { BacklogSection } from './types'
+import type { BacklogEntry, BacklogSection } from './types'
 
 export { adHocBacklogData, bugBacklogData, improvementBacklogData, newChangesBacklogData }
 export type { BacklogEntry, BacklogSection } from './types'
 
+export const backlogTasksData: BacklogEntry[] = [
+  ...bugBacklogData,
+  ...improvementBacklogData,
+  ...newChangesBacklogData,
+  ...adHocBacklogData,
+].sort((left, right) => Number(left.id.slice(2)) - Number(right.id.slice(2)))
+
 export const backlogSections: BacklogSection[] = [
-  {
-    key: 'bug',
-    label: 'Bug',
-    dotClass: 'task-dot-bug',
-    titleClass: 'backlog-title-bug',
-    items: bugBacklogData,
-  },
   {
     key: 'improvement',
     label: 'Improvement',
@@ -35,5 +35,12 @@ export const backlogSections: BacklogSection[] = [
     dotClass: 'task-dot-ad-hoc',
     titleClass: 'backlog-title-ad-hoc',
     items: adHocBacklogData,
+  },
+  {
+    key: 'bug',
+    label: 'Bug',
+    dotClass: 'task-dot-bug',
+    titleClass: 'backlog-title-bug',
+    items: bugBacklogData,
   },
 ]
