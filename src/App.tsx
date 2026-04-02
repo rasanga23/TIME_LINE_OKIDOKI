@@ -105,7 +105,7 @@ function BacklogPage() {
 
       <div className="backlog-accordion-group">
         {visibleBacklogSections.map((section) => (
-          <details key={section.key} className="backlog-accordion" open={section.key === 'bug'}>
+          <details key={section.key} className="backlog-accordion">
             <summary className="backlog-summary">
               <span className="task-label">
                 <span className={section.dotClass} aria-hidden="true" />
