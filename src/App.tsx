@@ -2,8 +2,6 @@ import { NavLink, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import {
   buildTimelineData,
-  releaseDatesData,
-  tasksData,
   type TaskEntry,
 } from './timeline-data'
 import { backlogSections } from './backlog-data'
@@ -96,99 +94,6 @@ function TimelinePage() {
   )
 }
 
-function ReleaseDatesPage() {
-  return (
-    <section className="page-section" aria-labelledby="release-dates-heading">
-      <div className="page-head">
-        <p className="eyebrow">Data Page</p>
-        <h1 id="release-dates-heading">Release Dates</h1>
-        <p className="intro">Each date includes release capacity as number of available hours.</p>
-      </div>
-
-      <div className="data-grid">
-        {releaseDatesData.map((item) => (
-          <article key={item.date} className="data-card">
-            <p className="timeline-date">{item.date}</p>
-            <h2>{item.capacityHours} Hours Capacity</h2>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function TasksPage() {
-  return (
-    <section className="page-section" aria-labelledby="tasks-heading">
-      <div className="page-head">
-        <p className="eyebrow">Data Page</p>
-        <h1 id="tasks-heading">Tasks</h1>
-        <p className="intro">Task title, required hours, and tag: bug, improvement, ad hoc, or new feature.</p>
-      </div>
-
-      <div className="task-table-wrap">
-        <table className="task-table">
-          <thead>
-            <tr>
-              <th>Task Title</th>
-              <th>Hours</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tasksData.map((task) => (
-              <tr key={task.id}>
-                <td>
-                  <span className="task-label">
-                    <span className={taskDotClass(task.tag)} aria-hidden="true" />
-                        <span className="task-title">{task.title}</span>
-                  </span>
-                </td>
-                <td>{task.hours}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  )
-}
-
-function PlannedReleasesPage() {
-  return (
-    <section className="page-section" aria-labelledby="planned-releases-heading">
-      <div className="page-head">
-        <p className="eyebrow">Data Page</p>
-        <h1 id="planned-releases-heading">Planned Releases</h1>
-        <p className="intro">Each date lists all related tasks from the Tasks page data.</p>
-      </div>
-
-      <div className="planned-stack">
-        {timelineData.map((entry) => (
-          <article key={entry.date} className="planned-card">
-            <h2>{entry.date}</h2>
-            <p>
-              Capacity: {entry.capacityHours}h | Planned: {entry.totalTaskHours}h
-            </p>
-            <ul>
-              {entry.tasks.map((task) => (
-                <li key={task.id}>
-                  <span className="task-label">
-                    <span className={taskDotClass(task.tag)} aria-hidden="true" />
-                    <span className="task-id">{task.id}</span>
-                    <span className="task-separator"> - </span>
-                    <span className="task-title">{task.title}</span>
-                  </span>
-                  <span>{task.hours}h</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function BacklogPage() {
   return (
     <section className="page-section" aria-labelledby="backlog-heading">
@@ -258,9 +163,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/timeline" replace />} />
           <Route path="/timeline" element={<TimelinePage />} />
-          <Route path="/release-dates" element={<ReleaseDatesPage />} />
-          <Route path="/tasks" element={<TasksPage />} />
-          <Route path="/planned-releases" element={<PlannedReleasesPage />} />
           <Route path="/backlog" element={<BacklogPage />} />
         </Routes>
       </main>
