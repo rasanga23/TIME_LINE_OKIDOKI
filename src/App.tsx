@@ -256,12 +256,12 @@ function App() {
           >
             Timeline
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/release-notes"
             className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           >
             Release Notes
-          </NavLink>
+          </NavLink> */}
         </nav>
       </header>
 
