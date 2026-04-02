@@ -2,23 +2,23 @@ import type { ReleaseDateEntry } from './types'
 
 export const releaseDatesData: ReleaseDateEntry[] = [
   {
-    date: '2026-04-05',
-    capacityHours: 40,
+    date: '2026-04-20',
+    capacityHours: 56,
   },
   {
-    date: '2026-04-10',
-    capacityHours: 52,
+    date: '2026-05-04',
+    capacityHours: 56,
   },
   {
-    date: '2026-04-12',
-    capacityHours: 52,
+    date: '2026-05-18',
+    capacityHours: 56,
   },
   {
-    date: '2026-04-19',
-    capacityHours: 44,
+    date: '2026-06-01',
+    capacityHours: 56,
   },
   {
-    date: '2026-04-29',
-    capacityHours: 60,
+    date: '2026-06-15',
+    capacityHours: 56,
   },
 ]

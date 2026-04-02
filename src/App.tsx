@@ -6,36 +6,7 @@ import {
   tasksData,
   type TaskEntry,
 } from './timeline-data'
-
-const releases = [
-  {
-    version: 'v1.2.0',
-    date: 'Apr 01, 2026',
-    highlights: [
-      'Introduced dedicated Timeline and Release Notes pages.',
-      'Applied full responsive redesign with brand-driven color palette.',
-      'Added GitHub Pages publish workflow and manual publish command.',
-    ],
-  },
-  {
-    version: 'v1.1.0',
-    date: 'Mar 25, 2026',
-    highlights: [
-      'Optimized images and load sequence for smoother first paint.',
-      'Refined spacing scale and typography for readability.',
-      'Improved metadata and favicon setup.',
-    ],
-  },
-  {
-    version: 'v1.0.0',
-    date: 'Mar 10, 2026',
-    highlights: [
-      'Initial baseline release with React and Vite foundation.',
-      'Prepared build pipeline and TypeScript project configuration.',
-      'Established reusable styling tokens and structure.',
-    ],
-  },
-]
+import { backlogSections } from './backlog-data'
 
 const okidokiLogo = `${import.meta.env.BASE_URL}okidoki.png`
 const overleapLogo = `${import.meta.env.BASE_URL}overleaplogo.png`
@@ -61,7 +32,7 @@ function TagLegend() {
         </li>
         <li>
           <span className="task-dot task-dot-new-feature" aria-hidden="true" />
-          New feature
+          New changes
         </li>
         <li>
           <span className="task-dot task-dot-improvement" aria-hidden="true" />
@@ -207,30 +178,36 @@ function PlannedReleasesPage() {
   )
 }
 
-function ReleaseNotesPage() {
+function BacklogPage() {
   return (
-    <section className="page-section" aria-labelledby="release-notes-heading">
+    <section className="page-section" aria-labelledby="backlog-heading">
       <div className="page-head">
-        <p className="eyebrow">Product Updates</p>
-        <h1 id="release-notes-heading">Release Notes</h1>
-        <p className="intro">
-          Version-by-version notes describing improvements, changes, and newly delivered capabilities.
-        </p>
+        <p className="eyebrow">Work Queue</p>
+        <h1 id="backlog-heading">Backlog</h1>
+        <p className="intro">The backlog is split into separate bug, improvement, new changes, and ad hoc sections.</p>
       </div>
 
-      <div className="release-grid">
-        {releases.map((release) => (
-          <article key={release.version} className="release-card">
-            <div className="release-meta">
-              <h2>{release.version}</h2>
-              <p>{release.date}</p>
+      <div className="backlog-accordion-group">
+        {backlogSections.map((section) => (
+          <details key={section.key} className="backlog-accordion" open={section.key === 'bug'}>
+            <summary className="backlog-summary">
+              <span className="task-label">
+                <span className={section.dotClass} aria-hidden="true" />
+                <span className={section.titleClass}>{section.label}</span>
+              </span>
+              <span className="backlog-summary-count">{section.items.length} items</span>
+            </summary>
+            <div className="backlog-panel">
+              <div className="backlog-item-list">
+                {section.items.map((item) => (
+                  <article key={item.id} className="backlog-item">
+                    <p className="backlog-id">{item.id}</p>
+                    <h2>{item.title}</h2>
+                  </article>
+                ))}
+              </div>
             </div>
-            <ul>
-              {release.highlights.map((item) => (
-                <li key={`${release.version}-${item}`}>{item}</li>
-              ))}
-            </ul>
-          </article>
+          </details>
         ))}
       </div>
     </section>
@@ -256,12 +233,12 @@ function App() {
           >
             Timeline
           </NavLink>
-          {/* <NavLink
-            to="/release-notes"
+          <NavLink
+            to="/backlog"
             className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           >
-            Release Notes
-          </NavLink> */}
+            Backlog
+          </NavLink>
         </nav>
       </header>
 
@@ -273,7 +250,7 @@ function App() {
           <Route path="/release-dates" element={<ReleaseDatesPage />} />
           <Route path="/tasks" element={<TasksPage />} />
           <Route path="/planned-releases" element={<PlannedReleasesPage />} />
-          <Route path="/release-notes" element={<ReleaseNotesPage />} />
+          <Route path="/backlog" element={<BacklogPage />} />
         </Routes>
       </main>
 
