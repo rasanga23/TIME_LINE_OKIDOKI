@@ -57,7 +57,7 @@ function TimelinePage() {
         <p className="eyebrow">Project Journey</p>
         <h1 id="timeline-heading">Delivery Pipeline</h1>
         <p className="intro intro-full-width">
-          This delivery pipeline shows upcoming and past release dates with tasks, helping you track what is next and what has already been delivered.
+          This delivery pipeline shows upcoming release dates with tasks, helping you track what is next for the project.
         </p>
       </div>
 
