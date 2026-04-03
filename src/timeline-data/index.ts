@@ -73,3 +73,48 @@ export function buildTimelineData(): TimelineEntry[] {
     }
   })
 }
+
+export function buildPastTimelineData(): TimelineEntry[] {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const plannedMap = new Map(plannedReleasesData.map((item) => [item.date, item.taskIds]))
+  const taskMap = new Map(backlogTasksData.map((task) => [task.id, task]))
+  const assignedTaskIds = new Set<string>()
+
+  const pastReleaseDates = [...releaseDatesData]
+    .filter((item) => {
+      const parsedDate = new Date(`${item.date}T00:00:00`)
+      return !Number.isNaN(parsedDate.getTime()) && parsedDate <= today
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+
+  return pastReleaseDates.map((releaseDate) => {
+    const selectedTasks = []
+    let usedHours = 0
+    const plannedTaskIds = plannedMap.get(releaseDate.date) ?? []
+
+    for (const taskId of plannedTaskIds) {
+      if (assignedTaskIds.has(taskId)) {
+        continue
+      }
+
+      const task = taskMap.get(taskId)
+
+      if (!task) {
+        continue
+      }
+
+      selectedTasks.push(task)
+      usedHours += task.hours
+      assignedTaskIds.add(task.id)
+    }
+
+    return {
+      date: releaseDate.date,
+      capacityHours: releaseDate.capacityHours,
+      totalTaskHours: usedHours,
+      tasks: selectedTasks,
+    }
+  })
+}

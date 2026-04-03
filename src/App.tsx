@@ -1,6 +1,7 @@
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import {
+  buildPastTimelineData,
   buildTimelineData,
   type TaskEntry,
 } from './timeline-data'
@@ -10,8 +11,9 @@ const okidokiLogo = `${import.meta.env.BASE_URL}okidoki.png`
 const overleapLogo = `${import.meta.env.BASE_URL}overleaplogo.png`
 
 const timelineData = buildTimelineData()
+const pastTimelineData = buildPastTimelineData()
 const scheduledTaskIds = new Set(
-  timelineData.flatMap((event) => event.tasks.map((task) => task.id)),
+  [...timelineData, ...pastTimelineData].flatMap((event) => event.tasks.map((task) => task.id)),
 )
 const visibleBacklogSections = backlogSections.map((section) => ({
   ...section,
@@ -53,9 +55,9 @@ function TimelinePage() {
     <section className="page-section" aria-labelledby="timeline-heading">
       <div className="page-head">
         <p className="eyebrow">Project Journey</p>
-        <h1 id="timeline-heading">Timeline</h1>
+        <h1 id="timeline-heading">Delivery Pipeline</h1>
         <p className="intro intro-full-width">
-          This timeline presents upcoming release dates, planned deliverables, and task progress in one clear view to support transparent client communication.
+          This delivery pipeline shows upcoming and past release dates with tasks, helping you track what is next and what has already been delivered.
         </p>
       </div>
 
@@ -90,6 +92,48 @@ function TimelinePage() {
           </li>
         ))}
       </ol>
+    </section>
+  )
+}
+
+function PastDatesPage() {
+  return (
+    <section className="page-section" aria-labelledby="past-dates-heading">
+      <div className="page-head">
+        <p className="eyebrow">Delivered Work</p>
+        <h1 id="past-dates-heading">Past Dates</h1>
+        <p className="intro intro-full-width">
+          Past delivery dates are listed from the nearest date at the top to the oldest date at the bottom, with the completed tasks for each date.
+        </p>
+      </div>
+
+      {pastTimelineData.length > 0 ? (
+        <ol className="timeline-list">
+          {pastTimelineData.map((event) => (
+            <li key={event.date} className="timeline-item">
+              <div className="timeline-dot" aria-hidden="true" />
+              <article className="timeline-card">
+                <p className="timeline-date timeline-date-ok">{event.date}</p>
+                <h2>Delivered Tasks</h2>
+                <ul className="mini-task-list">
+                  {event.tasks.map((task) => (
+                    <li key={task.id}>
+                      <span className="task-label">
+                        <span className={taskDotClass(task.tag)} aria-hidden="true" />
+                        <span className="task-id">{task.id}</span>
+                        <span className="task-separator"> - </span>
+                        <span className="task-title">{task.title}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p className="intro">No past delivery dates are available yet.</p>
+      )}
     </section>
   )
 }
@@ -147,7 +191,13 @@ function App() {
             to="/timeline"
             className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
           >
-            Timeline
+            Delivery Pipeline
+          </NavLink>
+          <NavLink
+            to="/past-dates"
+            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+          >
+            Past Dates
           </NavLink>
           <NavLink
             to="/backlog"
@@ -163,6 +213,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/timeline" replace />} />
           <Route path="/timeline" element={<TimelinePage />} />
+          <Route path="/past-dates" element={<PastDatesPage />} />
           <Route path="/backlog" element={<BacklogPage />} />
         </Routes>
       </main>
