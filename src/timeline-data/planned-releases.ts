@@ -7,6 +7,11 @@ export const plannedReleasesData: PlannedReleaseEntry[] = [
   },
   {
     date: '2026-05-04',
-    taskIds: ['ODL-I1074'],
-  }
+    taskIds: ['ODL-I1074','ODL-I2639','ODL-I2638','ODL-I2637','ODL-I2627','ODL-I2640'],
+  },
+  {
+    date: '2026-05-18',
+    taskIds: ['ODL-I1437','ODL-I1893'],
+  },
+
 ]

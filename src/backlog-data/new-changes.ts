@@ -26,7 +26,7 @@ export const newChangesBacklogData: BacklogEntry[] = [
     tag: 'new feature',
   },
   {
-    id: 'T-105',
+    id: 'ODL-I2640',
     title: 'CR - 50 - Addition of a new flag status called flag accept.',
     hours: 24,
     tag: 'new feature',
@@ -129,20 +129,26 @@ export const newChangesBacklogData: BacklogEntry[] = [
   },
   {
     id: 'ODL-I2627',
-    title: 'CR Vehicle utilization detail report.',
-    hours: 50,
+    title: 'CR 76 - Generate Truck Utilization Summary Report ',
+    hours: 20,
     tag: 'new feature',
   },
   {
-    id: 'ODL-I2627',
-    title: 'CR Add the actual arrival time column to the on-time delivery report..',
-    hours: 50,
+    id: 'ODL-I2637',
+    title: 'CR 77 - Enhancement to Vehicle Utilization Report with Utilization Status and MTD Average ',
+    hours: 10,
     tag: 'new feature',
   },
   {
-    id: 'ODL-I2628',
-    title: 'CR Add a separate column for Status and row for MTD AVG in summery report..',
-    hours: 50,
+    id: 'ODL-I2638',
+    title: 'CR 78 - Enhancement to On Time Delivery Performance Report ',
+    hours: 10,
+    tag: 'new feature',
+  },
+  {
+    id: 'ODL-I2639',
+    title: 'CR 79 - Enhancement to OnTime Delivery Performance Details Report  ',
+    hours: 10,
     tag: 'new feature',
   },
 ]
