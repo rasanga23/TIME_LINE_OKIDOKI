@@ -9,4 +9,9 @@ export const releaseDatesData: ReleaseDateEntry[] = [
     date: '2026-05-04',
     capacityHours: 56,
   },
+  {
+    date: '2026-05-18',
+    capacityHours: 56,
+  },
+
 ]

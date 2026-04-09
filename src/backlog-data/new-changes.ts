@@ -4,31 +4,31 @@ export const newChangesBacklogData: BacklogEntry[] = [
   {
     id: 'ODL-I2513',
     title: 'CR - 70 - Display Additional Remark Fields in Job Charge Filtering Panel',
-    hours: 12,
+    hours: 35,
     tag: 'new feature',
   },
   {
     id: 'T-103',
     title: 'CR - 23 - System Log Module.',
-    hours: 8,
+    hours: 225,
     tag: 'new feature',
   },
   {
     id: 'ODL-I1050',
     title: 'CR 34 - Assignment Of Multiple Customers & Shipper/Plant To Customer Users.',
-    hours: 8,
+    hours: 48,
     tag: 'new feature',
   },
   {
     id: 'T-104',
     title: 'CR - 45 - Incident Tracker Module',
-    hours: 20,
+    hours: 54,
     tag: 'new feature',
   },
   {
     id: 'T-105',
     title: 'CR - 50 - Addition of a new flag status called flag accept.',
-    hours: 15,
+    hours: 24,
     tag: 'new feature',
   },
   {
@@ -127,5 +127,22 @@ export const newChangesBacklogData: BacklogEntry[] = [
     hours: 15,
     tag: 'new feature',
   },
-
+  {
+    id: 'ODL-I2627',
+    title: 'CR Vehicle utilization detail report.',
+    hours: 50,
+    tag: 'new feature',
+  },
+  {
+    id: 'ODL-I2627',
+    title: 'CR Add the actual arrival time column to the on-time delivery report..',
+    hours: 50,
+    tag: 'new feature',
+  },
+  {
+    id: 'ODL-I2628',
+    title: 'CR Add a separate column for Status and row for MTD AVG in summery report..',
+    hours: 50,
+    tag: 'new feature',
+  },
 ]

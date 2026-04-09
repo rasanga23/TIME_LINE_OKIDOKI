@@ -3,7 +3,7 @@ import type { PlannedReleaseEntry } from './types'
 export const plannedReleasesData: PlannedReleaseEntry[] = [
   {
     date: '2026-04-20',
-    taskIds: ['ODL-I2562', 'ODL-I2513', 'ODL-I1374'],
+    taskIds: ['ODL-I2562', 'ODL-I2513', 'ODL-I1374','ODL-I2569','ODL-I2566','ODL-I2624','ODL-I2625','ODL-I2626','ODL-I2630'],
   },
   {
     date: '2026-05-04',
